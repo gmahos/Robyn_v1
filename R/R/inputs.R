@@ -213,11 +213,17 @@ robyn_inputs <- function(dt_input = NULL,
     check_nas(dt_holidays)
 
     ## Check date input (and set dayInterval and intervalType)
-    date_input <- check_datevar(dt_input, date_var)
+    date_input <- list(
+    date_var = date_var,
+    dayInterval = 1,
+    intervalType = 'day',
+    dt_input = as_tibble(dt_input)
+  )
     dt_input <- date_input$dt_input # sorted date by ascending
     date_var <- date_input$date_var # when date_var = "auto"
     dayInterval <- date_input$dayInterval
     intervalType <- date_input$intervalType
+
 
     ## Check dependent var
     check_depvar(dt_input, dep_var, dep_var_type)
